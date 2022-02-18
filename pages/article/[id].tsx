@@ -45,15 +45,7 @@ export const getServerSideProps = async ({ params }: Params) => {
   const data: any = await res.json();
 
   return {
-    props: { blogs: data.data },
-  };
-
-  return {
-    props: {
-      blog: {
-        ...data.data,
-      },
-    },
+    props: { blog: data.data },
   };
 };
 
