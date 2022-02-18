@@ -9,7 +9,7 @@ type Props = {
   blogs: Blog[];
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const res: Response = await fetch(
       `${process.env.HOST}/api/v1/blog?page=1&size=9`
