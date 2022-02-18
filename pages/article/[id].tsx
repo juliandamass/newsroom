@@ -12,6 +12,51 @@ type Props = {
   blog: Blog;
 };
 
+type Params = {
+  params: {
+    id: number;
+  };
+};
+
+// export async function getStaticPaths() {
+//   const res: Response = await fetch(
+//     `${process.env.HOST}/api/v1/blog?page=1&size=9`
+//   );
+//   const data: ResBlogs = await res.json();
+
+//   const paths = data.data.map((blog) => {
+//     return {
+//       params: {
+//         id: `${blog.id}`,
+//       },
+//     };
+//   });
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
+
+export const getServerSideProps = async ({ params }: Params) => {
+  const res: Response = await fetch(
+    `${process.env.HOST}/api/v1/blog/${params.id}`
+  );
+  const data: any = await res.json();
+
+  return {
+    props: { blogs: data.data },
+  };
+
+  return {
+    props: {
+      blog: {
+        ...data.data,
+      },
+    },
+  };
+};
+
 const Article = ({ blog }: Props) => {
   return (
     <div>
@@ -77,44 +122,3 @@ const Article = ({ blog }: Props) => {
 };
 
 export default Article;
-
-type Params = {
-  params: {
-    id: number;
-  };
-};
-
-export async function getStaticPaths() {
-  const res: Response = await fetch(
-    `${process.env.HOST}/api/v1/blog?page=1&size=9`
-  );
-  const data: ResBlogs = await res.json();
-
-  const paths = data.data.map((blog) => {
-    return {
-      params: {
-        id: `${blog.id}`,
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }: Params) {
-  const res: Response = await fetch(
-    `${process.env.HOST}/api/v1/blog/${params.id}`
-  );
-  const data: any = await res.json();
-
-  return {
-    props: {
-      blog: {
-        ...data.data,
-      },
-    },
-  };
-}
