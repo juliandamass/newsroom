@@ -32,7 +32,7 @@ const HeaderButton = ({ buttonData }: any) => {
           <div className="flex flex-col divide-y">
             {buttonData.menus.map((menu: any, i: number) => {
               return (
-                <a key={i} className="group flex py-4 cursor-pointer">
+                <a key={i} href={menu.link} className="group flex py-4 cursor-pointer">
                   <div className="flex items-center justify-center">
                     {i == 0 ? (
                       <User className=" w-9 h-9 mr-3 text-gray-400 group-hover:text-gray-900 transition" />

@@ -10,7 +10,7 @@ const Header = () => {
   const headerMenusData: any = [
     {
       title: 'About Us',
-      url: '/about-us',
+      url: 'https://www.parknparcel.com.sg/about-us',
       subMenus: {
         data: {
           descImagesUrl: 'menu-about-us.jpg',
@@ -21,23 +21,23 @@ const Header = () => {
         menus: [
           {
             title: 'Mission',
-            url: '/about-us#mission',
+            url: 'https://www.parknparcel.com.sg/about-us#mission',
           },
           {
             title: 'Milestones',
-            url: '/about-us#milestones',
+            url: 'https://www.parknparcel.com.sg/about-us#milestones',
           },
           {
             title: 'Awards & Recognition',
-            url: '/about-us#awards',
+            url: 'https://www.parknparcel.com.sg/about-us#awards',
           },
           {
             title: 'Trusted Partners',
-            url: '/about-us#trusted',
+            url: 'https://www.parknparcel.com.sg/about-us#trusted',
           },
           {
             title: 'News Features ',
-            url: '/about-us#news',
+            url: 'https://www.parknparcel.com.sg/about-us#news',
           },
         ],
       },
@@ -55,26 +55,26 @@ const Header = () => {
         menus: [
           {
             title: 'Promotions',
-            url: '/promotions',
+            url: 'https://www.parknparcel.com.sg/promotions',
           },
           {
             title: 'Last-Mile Delivery',
-            url: '/last-mile-delivery',
+            url: 'https://www.parknparcel.com.sg/last-mile-delivery',
           },
           {
             title: 'Parker Points',
-            url: '/parker-point',
+            url: 'https://www.parknparcel.com.sg/parker-point',
           },
           {
             title: 'Fulfillment & Warehousing ',
-            url: '/fulfillment',
+            url: 'https://www.parknparcel.com.sg/fulfillment',
           },
         ],
       },
     },
     {
       title: 'Tracking',
-      url: '/track',
+      url: 'https://www.parknparcel.com.sg/track',
     },
     {
       title: 'Resources',
@@ -110,15 +110,15 @@ const Header = () => {
         menus: [
           {
             title: 'Order Creation Guides',
-            url: '/guides',
+            url: 'https://www.parknparcel.com.sg/guides',
           },
           {
             title: 'Contact Us',
-            url: '/contact-us',
+            url: 'https://www.parknparcel.com.sg/contact-us',
           },
           {
             title: 'FAQ',
-            url: '/guides#faq',
+            url: 'https://www.parknparcel.com.sg/guides#faq',
           },
         ],
       },
@@ -158,7 +158,7 @@ const Header = () => {
         text: 'Parker Sign Up',
         subText: 'Be a part of our parker (collection) point network',
         linkType: 'internal',
-        link: '/parker-point-signup#parker-point-form',
+        link: 'https://www.parknparcel.com.sg/parker-point-signup#parker-point-form',
       },
     ],
   };
