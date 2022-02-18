@@ -1,0 +1,203 @@
+/* tailwind directives */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* end tailwind directives */
+
+/* button */
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-2 text-base leading-6 transition duration-150 ease-out font-display bg-red-50;
+
+  @screen md {
+    width: auto;
+    margin-button: 0;
+  }
+}
+
+.btn.w-full {
+  width: 100% !important;
+}
+
+/* button default */
+
+.btn--primary {
+  @apply text-white bg-primary shadow-primary border-2 border-primary;
+}
+
+.btn--primary:hover {
+  @apply bg-primary-dark border-primary-dark;
+}
+
+.btn.btn--primary:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-primary;
+}
+
+.btn--secondary {
+  @apply text-white bg-secondary shadow-secondary border-2 border-secondary;
+}
+
+.btn--secondary:hover {
+  @apply bg-secondary-dark border-secondary-dark;
+}
+
+.btn.btn--secondary:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-secondary;
+}
+
+.btn--secondary--dark {
+  @apply text-white bg-secondary-dark shadow-secondary border-2 border-secondary-dark;
+}
+
+.btn--secondary--dark:hover {
+  @apply bg-secondary border-secondary;
+}
+
+.btn.btn--secondary--dark:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-secondary;
+}
+
+.btn.btn--default {
+  @apply text-gray-500 bg-gray-100;
+}
+
+.btn.btn--default:hover {
+  @apply bg-gray-200 text-gray-600;
+}
+
+.btn--corange {
+  @apply text-white bg-corange shadow-corange border-2 border-corange;
+}
+
+.btn--corange:hover {
+  @apply bg-corange-light border-corange-light;
+}
+
+.btn.btn--corange:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-corange;
+}
+
+/* button white */
+
+.btn--white {
+  @apply bg-white border-2 border-white;
+}
+
+.btn--white:hover {
+  @apply bg-gray-200 border-gray-200;
+}
+
+.btn.btn--white:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-gray-100;
+}
+
+/* button outline */
+
+.btn--primary--outline {
+  @apply bg-transparent shadow-primary border-2 border-primary text-primary;
+}
+
+.btn--primary--outline:hover {
+  @apply text-white bg-primary;
+}
+
+.btn.btn--primary--outline:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-primary;
+}
+
+.btn--white--outline {
+  @apply bg-transparent shadow-white border-2 border-white text-white;
+}
+
+.btn--white--outline:hover {
+  @apply text-gray-900 bg-white;
+}
+
+.btn.btn--white--outline:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-white;
+}
+
+.btn--gray--outline {
+  @apply bg-transparent shadow-gray border-2 border-gray-400 text-gray-900;
+}
+
+.btn--gray--outline:hover {
+  @apply text-white bg-gray-400;
+}
+
+.btn.btn--gray--outline:focus {
+  @apply outline-none ring-2 ring-offset-2 ring-gray-400;
+}
+
+/* button size */
+
+.btn.btn--xs {
+  @apply px-3 py-1 text-xs;
+}
+
+.btn.btn--sm {
+  @apply px-4 py-2 text-sm;
+}
+
+.btn.btn--lg {
+  @apply px-9 py-3 text-xl;
+}
+
+.btn.btn--xl {
+  @apply px-14 py-4 text-2xl;
+}
+
+/* button other */
+
+.btn--nav {
+  @apply py-1;
+}
+
+/* end button */
+
+/* animation */
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* end animation */
+
+/* main */
+
+.hero {
+  height: 500px;
+}
+
+.featured {
+  height: 300px;
+}
+
+.article-icon {
+  width: 30px;
+  height: 30px;
+}
+
+@screen md {
+  .featured {
+    height: 600px;
+  }
+}
+
+/* end main */
