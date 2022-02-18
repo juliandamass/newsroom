@@ -123,7 +123,7 @@ const Footer = () => {
                 href="https://www.instagram.com/parknparcelsg/"
                 target="_blank"
                 rel="noreferrer"
-                className="flexitems-centerjustify-centerw-9h-9bg-whiterounded-full"
+                className="flex items-center justify-center w-9 h-9 bg-white rounded-full"
               >
                 <Instagram className="w-4 h-4 text-primary" />
               </a>
