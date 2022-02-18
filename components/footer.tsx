@@ -22,16 +22,16 @@ const Footer = () => {
                   Park N Parcel
                 </li>
                 <li className="mb-1 block">
-                  <a href="/about-us">About us</a>
+                  <a href="https://www.parknparcel.com.sg/about-us">About us</a>
                 </li>
                 <li className="mb-1 block">
-                  <a href="/track">Track your parcel</a>
+                  <a href="https://www.parknparcel.com.sg/track">Track your parcel</a>
                 </li>
                 <li className="mb-1 block">
-                  <a href="/drive-with-us">Apply as a Driver</a>
+                  <a href="https://www.parknparcel.com.sg/drive-with-us">Apply as a Driver</a>
                 </li>
                 <li className="mb-1 block">
-                  <a href="/parker-point-signup">Parker Point Partnership</a>
+                  <a href="https://www.parknparcel.com.sg/parker-point-signup">Parker Point Partnership</a>
                 </li>
               </ul>
             </div>
@@ -50,10 +50,10 @@ const Footer = () => {
               <ul className="list-none text-md">
                 <li className="mb-4 block text-xl font-semibold">Support</li>
                 <li className="mb-1 block">
-                  <a href="/contact-us">Contact Us</a>
+                  <a href="https://www.parknparcel.com.sg/contact-us">Contact Us</a>
                 </li>
                 <li className="mb-1 block">
-                  <a href="/guides#faq">FAQ</a>
+                  <a href="https://www.parknparcel.com.sg/guides#faq">FAQ</a>
                 </li>
               </ul>
             </div>
@@ -82,7 +82,7 @@ const Footer = () => {
                 </p>
               </div>
 
-              <div className="flex items-center space-x-3">
+              <div className="flex lg:hidden items-center space-x-3">
                 <a
                   href="https://www.linkedin.com/company/parknparcelsg"
                   target="_blank"
@@ -221,9 +221,9 @@ const Footer = () => {
             </p>
           </div>
           <div className="flex flex-col lg:flex-row lg:space-x-10 space-y-2 lg:space-y-0 text-center lg:text-right text-gray-400 mb-8 lg:mb-0 ">
-            <a href="/privacy-policy">Privacy Policy</a>
-            <a href="/terms-and-conditions">Terms and Conditions</a>
-            <a href="/disclaimer">Disclaimer</a>
+            <a href="https://www.parknparcel.com.sg/privacy-policy">Privacy Policy</a>
+            <a href="https://www.parknparcel.com.sg/terms-and-conditions">Terms and Conditions</a>
+            <a href="https://www.parknparcel.com.sg/disclaimer">Disclaimer</a>
           </div>
         </div>
       </div>
