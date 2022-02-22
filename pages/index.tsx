@@ -1,3 +1,8 @@
+import { Router, useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
+import ReactPaginate from 'react-paginate';
+
 import Header from '../components/header';
 import ArticleCard from '../components/article-card';
 import Footer from '../components/footer';
@@ -5,27 +10,42 @@ import Footer from '../components/footer';
 import { ResBlogs } from '../interfaces/res-blogs';
 import { Blog } from '../interfaces/blog';
 
-type Props = {
+interface Props {
   blogs: Blog[];
-};
+  pageCount: number;
+}
 
-export const getServerSideProps = async () => {
-  try {
-    const res: Response = await fetch(
-      `${process.env.HOST}/api/v1/blog?page=1&size=9`
-    );
-    const data: ResBlogs = await res.json();
+const Home = ({ blogs, pageCount }: Props) => {
+  const [isLoading, setLoading] = useState(false);
+  const startLoading = () => setLoading(true);
+  const stopLoading = () => setLoading(false);
 
-    return {
-      props: { blogs: data.data },
+  useEffect(() => {
+    Router.events.on('routeChangeStart', startLoading);
+    Router.events.on('routeChangeComplete', stopLoading);
+
+    return () => {
+      Router.events.off('routeChangeStart', startLoading);
+      Router.events.off('routeChangeComplete', stopLoading);
     };
-  } catch (error) {
-    console.error('Error fetching homepage data', error);
-    // return { notFound: true };
-  }
-};
+  }, []);
 
-const Home = ({ blogs }: Props) => {
+  const router = useRouter();
+  const paginationHandler = (page: any) => {
+    const currentPath = router.pathname;
+    const currentQuery = router.query;
+    currentQuery.page = page.selected + 1;
+
+    router.push(
+      {
+        pathname: currentPath,
+        query: currentQuery,
+      },
+      undefined,
+      { scroll: false }
+    );
+  };
+
   return (
     <div>
       <Header />
@@ -87,137 +107,83 @@ const Home = ({ blogs }: Props) => {
             </div>
           </div>
         </div>
-        <div className="lg:px-28 py-8">
-          <div className="featured relative w-full">
-            <img
-              src="images/img-featured.jpg"
-              className="absolute w-full h-full object-cover z-10"
-            />
-            <div className="relative w-full h-full flex z-20">
-              <div className="w-full max-w-lg mt-auto px-6 lg:px-12 py-6 lg:py-14">
-                <h3 className="text-sm text-white mb-2">
-                  Sep 27, 2021 <span className="italic">by Meet Insights</span>
-                </h3>
-                <p className="text-2xl text-white">
-                  Bryan See Toh on Revolutionising the Logistics Industry
-                </p>
+        {isLoading ? (
+          <div className="text-center">Loading...</div>
+        ) : blogs != null ? (
+          <div>
+            <div className="lg:px-28 py-8">
+              <div className="featured relative w-full">
+                <img
+                  src="images/img-featured.jpg"
+                  className="absolute w-full h-full object-cover z-10"
+                />
+                <div className="relative w-full h-full flex z-20">
+                  <div className="w-full max-w-lg mt-auto px-6 lg:px-12 py-6 lg:py-14">
+                    <h3 className="text-sm text-white mb-2">
+                      Sep 27, 2021{' '}
+                      <span className="italic">by Meet Insights</span>
+                    </h3>
+                    <p className="text-2xl text-white">
+                      Bryan See Toh on Revolutionising the Logistics Industry
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="py-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {blogs.map((blog: any, i: number) => (
+                  <ArticleCard key={i} index={i} blog={blog} />
+                ))}
               </div>
             </div>
           </div>
-        </div>
-        <div className="py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {blogs.map((blog: any, i: number) => (
-              <ArticleCard key={i} index={i} blog={blog} />
-            ))}
+        ) : (
+          <div className="col-span-2 text-center py-6 lg:py-20">
+            <h2 className="text-2xl">No Article</h2>
           </div>
-        </div>
+        )}
         <div className="flex items-center py-6 lg:py-20">
-          <ul className="inline-flex mx-auto">
-            <li>
-              <a href="#" className="p-3 mx-1 border-b-4 border-transparent">
-                &#60;
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="p-3 mx-1 border-b-4 border-transparent border-primary"
-              >
-                1
-              </a>
-            </li>
-            {/* <li>
-              <a href="#" className="p-3 mx-1 border-b-4 border-transparent">
-                2
-              </a>
-            </li>
-            <li>
-              <a href="#" className="p-3 mx-1 border-b-4 border-transparent">
-                3
-              </a>
-            </li>
-            <li>
-              <a href="#" className="p-3 mx-1 border-b-4 border-transparent">
-                4
-              </a>
-            </li>
-            <li>
-              <a href="#" className="p-3 mx-1 border-b-4 border-transparent">
-                5
-              </a>
-            </li> */}
-            <li>
-              <a href="#" className="p-3 mx-1 border-b-4 border-transparent">
-                &#62;
-              </a>
-            </li>
-          </ul>
+          <ReactPaginate
+            previousLabel={'<'}
+            previousClassName={
+              'px-3 mx-1 border-b-4 border-transparent cursor-pointer'
+            }
+            nextLabel={'>'}
+            nextClassName={
+              'px-3 mx-1 border-b-4 border-transparent cursor-pointer'
+            }
+            containerClassName={'inline-flex mx-auto'}
+            pageLinkClassName={
+              'p-3 mx-1 border-b-4 border-transparent cursor-pointer'
+            }
+            activeLinkClassName={'border-primary'}
+            pageCount={pageCount}
+            pageRangeDisplayed={5}
+            onPageChange={paginationHandler}
+          />
         </div>
       </div>
       <Footer />
-
-      {/* <Head>
-        <title>Create Next App</title>
-        <meta name="description" content="Generated by create next app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer> */}
     </div>
   );
+};
+
+export const getServerSideProps = async ({ query }: any) => {
+  const page = query.page || 1;
+  const size = 3;
+  const res: Response = await fetch(
+    `${process.env.HOST}/api/v1/blog?page=${page}&size=${size}`
+  );
+  const data: ResBlogs = await res.json();
+  let pageCount = Math.round(data.total / size);
+
+  return {
+    props: {
+      blogs: data.data,
+      pageCount,
+    },
+  };
 };
 
 export default Home;
