@@ -176,9 +176,7 @@ Home.getInitialProps = async ({ query }: any) => {
     `https://pnp-go-staging.parknparcel.com/api/v1/blog?page=${page}&size=${size}`
   );
   const data: ResBlogs = await res.json();
-  let pageCount = Math.round(data.total / size);
-
-  console.log(data);
+  let pageCount = Math.ceil(data.total / size);
 
   return {
     blogs: data.data,

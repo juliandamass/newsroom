@@ -85,7 +85,7 @@ type Params = {
   };
 };
 
-export async function getStaticProps({ params }: Params) {
+export async function getServerSideProps({ params }: Params) {
   const res: Response = await fetch(
     `${process.env.HOST}/api/v1/blog/${params.id}`
   );
@@ -98,21 +98,21 @@ export async function getStaticProps({ params }: Params) {
   };
 }
 
-export const getStaticPaths = async () => {
-  const res: Response = await fetch(
-    `${process.env.HOST}/api/v1/blog?page=1&size=3`
-  );
-  const data: ResBlogs = await res.json();
+// export const getStaticPaths = async () => {
+//   const res: Response = await fetch(
+//     `${process.env.HOST}/api/v1/blog?page=1&size=3`
+//   );
+//   const data: ResBlogs = await res.json();
 
-  return {
-    paths: data.data.map((blog) => {
-      return {
-        params: {
-          id: blog.id.toString(),
-          slug: blog.id.toString(),
-        },
-      };
-    }),
-    fallback: false,
-  };
-};
+//   return {
+//     paths: data.data.map((blog) => {
+//       return {
+//         params: {
+//           id: blog.id.toString(),
+//           slug: blog.id.toString(),
+//         },
+//       };
+//     }),
+//     fallback: false,
+//   };
+// };
