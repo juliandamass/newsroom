@@ -1,4 +1,4 @@
-import { Router, useRouter } from 'next/router';
+import { Router, useRouter, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import ReactPaginate from 'react-paginate';
@@ -10,12 +10,12 @@ import Footer from '../components/footer';
 import { ResBlogs } from '../interfaces/res-blogs';
 import { Blog } from '../interfaces/blog';
 
-interface Props {
+type Props = {
   blogs: Blog[];
   pageCount: number;
-}
+};
 
-const Home = ({ blogs, pageCount }: Props) => {
+const Home = ({ blogs, pageCount }: any) => {
   const [isLoading, setLoading] = useState(false);
   const startLoading = () => setLoading(true);
   const stopLoading = () => setLoading(false);
@@ -132,7 +132,7 @@ const Home = ({ blogs, pageCount }: Props) => {
             </div>
             <div className="py-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {blogs.map((blog: any, i: number) => (
+                {blogs.map((blog: Blog, i: number) => (
                   <ArticleCard key={i} index={i} blog={blog} />
                 ))}
               </div>
@@ -169,21 +169,21 @@ const Home = ({ blogs, pageCount }: Props) => {
   );
 };
 
-export const getServerSideProps = async ({ query }: any) => {
+Home.getInitialProps = async ({ query }: any) => {
   const page = query.page || 1;
   const size = 3;
   const res: Response = await fetch(
-    `${process.env.HOST}/api/v1/blog?page=${page}&size=${size}`
+    `https://pnp-go-staging.parknparcel.com/api/v1/blog?page=${page}&size=${size}`
   );
   const data: ResBlogs = await res.json();
   let pageCount = Math.round(data.total / size);
 
+  console.log(data);
+
   return {
-    props: {
-      blogs: data.data,
-      pageCount,
-    },
+    blogs: data.data,
+    pageCount,
   };
 };
 
-export default Home;
+export default withRouter(Home);

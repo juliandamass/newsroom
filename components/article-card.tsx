@@ -35,12 +35,13 @@ const ArticleCard = ({ index, blog }: Props) => {
           <div className="inline-block px-5 py-1 mb-2 bg-primary rounded-full text-xs text-white uppercase">
             {blog.types.name}
           </div>
-          <h4 className="text-lg font-semibold mb-1 line-clamp-2">{blog.title}</h4>
+          <h4 className="text-lg font-semibold mb-1 line-clamp-2">
+            {blog.title}
+          </h4>
           <p className="text-sm font-light mb-4">
-            Nov 19, 2021{' '}
-            <span className="italic">by {blog.sources.name}</span>
+            Nov 19, 2021 <span className="italic">by {blog.sources.name}</span>
           </p>
-          <div className='line-clamp-3'>{blog.highlight}</div>
+          <div className="line-clamp-3">{blog.highlight}</div>
         </div>
       </div>
     </Link>
